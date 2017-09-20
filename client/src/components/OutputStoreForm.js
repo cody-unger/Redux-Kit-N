@@ -54,13 +54,13 @@ class OutputStoreForm extends React.Component {
           <i className="material-icons addButton pointer purple"
             onClick={this.handleClickAdd.bind(this)}>add</i>
         </div>
-        <div className={`outputStoreFormTextArea${this.props.leftBorder}`}> 
+        <div className={`outputStoreFormTextArea${this.props.leftBorder}`}>
           {utilities.outputStore.generateStoreArray(this.props.outputStore.properties, OutputStoreRow, actions.toggleEditStoreModal)}
         </div>
         <OutputStoreEdit targets={utilities.outputStore.getTargetsFromOutputStore(this.props.outputStore.properties)}/>
       </div>
     );
-  }  
+  }
 }
 
 OutputStoreForm = connect(

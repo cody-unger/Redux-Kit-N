@@ -201,22 +201,22 @@ class TreeBranch extends React.Component {
 
         
           
-          <Popover
-            open={this.state.hover}
-            anchorEl={this.anchor}
-            anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-            useLayerForClickAway={false}
-            canAutoPosition={false}
-            animated={true}
-            useLayerForClickAway={false}
+        <Popover
+          open={this.state.hover}
+          anchorEl={this.anchor}
+          anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+          useLayerForClickAway={false}
+          canAutoPosition={false}
+          animated={true}
+          useLayerForClickAway={false}
+        >
+          <div
+            style={{ padding: '8px 12px' }}
           >
-            <div
-              style={{ padding: '8px 12px' }}
-            >
-              {this.getProps()}
-              {this.getActions()}
-            </div>
-          </Popover>
+            {this.getProps()}
+            {this.getActions()}
+          </div>
+        </Popover>
         
       </div>
     );

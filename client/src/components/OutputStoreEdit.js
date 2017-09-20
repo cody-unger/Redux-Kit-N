@@ -40,9 +40,9 @@ class OutputStoreEdit extends React.Component {
       if (editing.targetName) {
         last = editing.targetName.slice(editing.targetName.length - 11);
         targetNameWithoutLast = editing.targetName.includes('.') ?
-                                      editing.targetName.slice(0, editing.targetName.lastIndexOf('.') + 1)
-                                      :
-                                      '';
+          editing.targetName.slice(0, editing.targetName.lastIndexOf('.') + 1)
+          :
+          '';
       }
       
       if (!isElementSchema) {
@@ -53,7 +53,7 @@ class OutputStoreEdit extends React.Component {
                 && (`${targetNameWithoutLast}${this.state.name}` !== editing.targetName 
                   || this.state.name === 'newProperty' && last === 'newProperty')
                 && `${targetNameWithoutLast}${this.state.name}` in this.props.targets)
-            ) {
+        ) {
           throw 'name';
         }
         if (this.state.type === '') {
