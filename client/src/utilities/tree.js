@@ -35,7 +35,6 @@ export const generateTreeArray = (
     let connectionCanBeToggled = !inheritsConnection && !hasConnectedDescendant;
     let childrenInheritConnection = inheritsConnection || component.connected;
 
-    console.log(key);
     treeArray.push(
       <TreeBranch
         key={key}

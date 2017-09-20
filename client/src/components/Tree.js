@@ -351,7 +351,16 @@ class Tree extends React.Component {
   render() {
     return (
       <div className={this.props.colWidth}>
-        <h4 className="appTreeHeading" >App Tree</h4>
+        <h4 className="appTreeHeading" >
+          App Tree
+
+          <i
+            className="material-icons addButton pointer purple"
+            onClick={() => actions.toggleHelp('COMPONENT_TREE')}
+          >
+            help_outline
+          </i>
+        </h4>
         {
           this.props.outputComponents.editing &&
           <Modal
@@ -361,7 +370,7 @@ class Tree extends React.Component {
           />
         }
 
-        <div className={`tree${this.props.leftBorder}`}>
+                <div className={`tree${this.props.leftBorder}`}>
           {
             utils.tree.generateTreeArray(
               this.props.outputComponents.components,
@@ -370,6 +379,7 @@ class Tree extends React.Component {
             )
           }
         </div>
+
       </div>
     );
   }
