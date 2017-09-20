@@ -18,6 +18,7 @@ const actionInput = (type, target) => {
       return 'key, value';
     }
   }
+  return '/* FILL ME IN */';
 };
 
 const actionOutput = (type, target) => {
@@ -37,13 +38,13 @@ const actionOutput = (type, target) => {
       return 'key,\n  value';
     }
   }
-
+  return '/* FILL ME IN */';
 };
 
 const makeHeader = (types) => {
   let header = '';
   types.forEach((type) => {
-    header += `const ${type} = "${type}";\n`;
+    header += `const ${type} = '${type}';\n`;
   });
   return header;
 };
@@ -53,7 +54,7 @@ const makeExport = (types) => {
   types.forEach((type) => {
     exp += `  ${type},\n`;
   });
-  return exp += '}\n\n';
+  return exp += '};\n\n';
 };
 
 const createActionJs = (onion) => {
@@ -75,7 +76,7 @@ const createActionJs = (onion) => {
     types.push(type);
     // create and save action list to actionList array
     actionList += `const ${action.name} = (${actionInput(action.type, target)}) => ({\n`
-      + `  type: ${type},\n  ${actionOutput(action.type, target)}\n})\n\n`;
+      + `  type: ${type},\n  ${actionOutput(action.type, target)}\n});\n\n`;
     actionsExport += `  ${action.name},\n`;
   });
   //stitch together the header, export and action functions
