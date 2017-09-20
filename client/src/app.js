@@ -119,6 +119,7 @@ class ConnectedApp extends React.Component {
             </CSSTransitionGroup>
             
             <SubmitForm />
+            <div className='blocker'></div>
           </div>
         </MuiThemeProvider>
       </Provider>

@@ -410,4 +410,10 @@ textarea:focus {
   }
 }
 
+.blocker {
+  width: 60px;
+  height: 25px;
+  z-index: 5;
+}
+
 

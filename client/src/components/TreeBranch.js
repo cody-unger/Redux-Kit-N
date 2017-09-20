@@ -199,15 +199,16 @@ class TreeBranch extends React.Component {
           }
         </div>
 
-        {
-          this.anchor &&
+        
+          
           <Popover
             open={this.state.hover}
             anchorEl={this.anchor}
             anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
             useLayerForClickAway={false}
             canAutoPosition={false}
-            animated={false}
+            animated={true}
+            useLayerForClickAway={false}
           >
             <div
               style={{ padding: '8px 12px' }}
@@ -216,7 +217,7 @@ class TreeBranch extends React.Component {
               {this.getActions()}
             </div>
           </Popover>
-        }
+        
       </div>
     );
   }
