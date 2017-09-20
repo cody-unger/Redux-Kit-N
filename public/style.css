@@ -2,6 +2,13 @@ html, body {
   color: #484848;
   background-color: #f9f9f9;
   font-family: "Roboto",sans-serif;
+  overflow-y: hidden;
+}
+
+@media (max-width: 991px) {
+  html, body {
+    overflow-y: auto;
+  }
 }
 
 .container {
@@ -412,8 +419,6 @@ textarea:focus {
 
 .blocker {
   width: 60px;
-  height: 25px;
+  height: 5000px;
   z-index: 5;
 }
-
-
