@@ -442,3 +442,15 @@ textarea:focus {
 .errorMessages {
   margin-bottom: 3px;
 }
+
+.xCell {
+  height: 63px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.xColumn {
+  flex-basis: 40px;
+  flew-grow: 0;
+}

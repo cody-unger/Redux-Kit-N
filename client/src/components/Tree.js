@@ -32,7 +32,6 @@ const cleanFormProps = (state) => {
   let parentProps = _removeEmptyProps(state.parentProps);
   let storeProps = _removeEmptyProps(state.storeProps);
   let warnings = _validateProps(parentProps.concat(storeProps));
-  console.log(warnings);
   return {parentProps, storeProps, warnings};
 };
 
@@ -219,24 +218,13 @@ class Modal extends React.Component {
 
     return (
       <div style={{display: 'flex'}}>
-        <div className='xColumn' style={{flexBasis: '40px', flewGrow: 0}}>
+        <div className='xColumn'>
           {
             this.state[type].map((prop, i) => (
-              <div
-                key={i}
-                className='xCell'
-                style={{
-                  height: '63px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'left'
-                }}
-              >
+              <div key={i} className='xCell'>
                 <i
                   className="material-icons pointer purple"
-                  onClick={() => {
-                    this.deleteProp(i, type);
-                  }}
+                  onClick={() => { this.deleteProp(i, type); }}
                 >
                   clear
                 </i>
@@ -321,7 +309,7 @@ class Modal extends React.Component {
             noSourcesMessage :
             <div>
               { this.getPropsFormWarnings() }
-              { this.getEditableProps() }
+              { this.getEditableProps(type) }
             </div>
         }
 
@@ -382,22 +370,26 @@ class Modal extends React.Component {
                 Actions
               </h5>
 
-              <SelectField
-                multiple={true}
-                hintText={
-                  (_.size(formActions) === 0) ?
-                    'Select a name' :
-                    ''
-                }
-                values={Object.keys(formActions)}
-                onChange={this.updateActions}
-                selectionRenderer={(values) => {
-                  return actionNames.join(', ');
-                }}
-                selectedMenuItemStyle={{color: '#6653ff'}}
-              >
-                {menuItems}
-              </SelectField>
+              {
+                _.isEmpty(this.props.outputActions) ?
+                  'No actions have been defined yet.' :
+                  <SelectField
+                    multiple={true}
+                    hintText={
+                      (_.size(formActions) === 0) ?
+                        'Select a name' :
+                        ''
+                    }
+                    values={Object.keys(formActions)}
+                    onChange={this.updateActions}
+                    selectionRenderer={(values) => {
+                      return actionNames.join(', ');
+                    }}
+                    selectedMenuItemStyle={{color: '#6653ff'}}
+                  >
+                    {menuItems}
+                  </SelectField>
+              }
             </div>
 
             {
