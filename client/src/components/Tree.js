@@ -204,15 +204,7 @@ class Modal extends React.Component {
       );
   }
 
-  getPropsForm(type = 'parentProps') {
-    let headerText = type === 'parentProps' ?
-      'Props From Parent' :
-      'Props From Store';
-
-    let sourceLabel = type === 'parentProps' ?
-      'Parent Prop Name' :
-      'Store Path';
-
+  getEditableProps(type = 'parentProps') {
     let nameKey = type === 'parentProps' ?
       'childProp' :
       'propName';
@@ -220,6 +212,97 @@ class Modal extends React.Component {
     let sourceKey = type === 'parentProps' ?
       'parentProp' :
       'storeProp';
+
+    let sourceLabel = type === 'parentProps' ?
+      'Parent Prop Name' :
+      'Store Path';
+
+    return (
+      <div style={{display: 'flex'}}>
+        <div className='xColumn' style={{flexBasis: '40px', flewGrow: 0}}>
+          {
+            this.state[type].map((prop, i) => (
+              <div
+                key={i}
+                className='xCell'
+                style={{
+                  height: '63px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'left'
+                }}
+              >
+                <i
+                  className="material-icons pointer purple"
+                  onClick={() => {
+                    this.deleteProp(i, type);
+                  }}
+                >
+                  clear
+                </i>
+              </div>
+            ))
+          }
+        </div>
+
+        <div className='propsColumn' style={{flexGrow: 1}}>
+          {
+            this.state[type].map((prop, i) => (
+              <div className='row' key={i}>
+                <div className='col-6'>
+                  <TextField
+                    floatingLabelText='Prop Name'
+                    inputStyle={{marginTop: '6px'}}
+                    value={this.state[type][i][nameKey]}
+                    { ...formInputProps }
+                    onChange={(event) => {
+                      this.updatePropName(event.target.value, i, type);
+                    }}
+                    underlineFocusStyle={{borderBottomColor: '#6653ff'}}
+                    floatingLabelFocusStyle={{color: '#6653ff'}}
+                  />
+                </div>
+                <div className='col-6'>
+                  <SelectField
+                    floatingLabelText={sourceLabel}
+                    inputStyle={{marginTop: '0px'}}
+                    { ...formInputProps }
+                    value={this.state[type][i][sourceKey]}
+                    disabled={_.isEmpty(this.allProps)}
+                    defaultValue={this.state[type][i][nameKey]}
+                    onChange={(e, k, payload) => {
+                      this.updatePropSource(payload, i, type);
+                    }}
+                    selectedMenuItemStyle={{color: '#6653ff'}}
+                  >
+                    { this.allProps.map((prop, j) => (
+                      <MenuItem
+                        key={j}
+                        insetChildren={true}
+                        checked={prop === this.state[type][j]}
+                        disabled={this.usedProps.has(prop)}
+                        value={prop}
+                        primaryText={prop}
+                      />
+                    ))}
+                  </SelectField>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    );
+  }
+
+  getPropsForm(type = 'parentProps') {
+    let headerText = type === 'parentProps' ?
+      'Props From Parent' :
+      'Props From Store';
+
+    let noSourcesMessage = type === 'parentProps' ?
+      'This component\'s parent has no props to pass.' :
+      'No properties have been declared in your store.';
 
     return (
       <div className='col-lg-6'>
@@ -233,81 +316,15 @@ class Modal extends React.Component {
           </i>
         </div>
 
-        { this.getPropsFormWarnings() }
-        <div style={{display: 'flex'}}>
-          <div className='xColumn' style={{flexBasis: '40px', flewGrow: 0}}>
-            {
-              this.state[type].map((prop, i) => (
-                <div
-                  key={i}
-                  className='xCell'
-                  style={{
-                    height: '63px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'left'
-                  }}
-                >
-                  <i
-                    className="material-icons pointer purple"
-                    onClick={() => {
-                      this.deleteProp(i, type);
-                    }}
-                  >
-                    clear
-                  </i>
-                </div>
-              ))
-            }
-          </div>
+        {
+          _.isEmpty(this.allProps) ?
+            noSourcesMessage :
+            <div>
+              { this.getPropsFormWarnings() }
+              { this.getEditableProps() }
+            </div>
+        }
 
-          <div className='propsColumn' style={{flexGrow: 1}}>
-            {
-              this.state[type].map((prop, i) => (
-                <div className='row' key={i}>
-                  <div className='col-6'>
-                    <TextField
-                      floatingLabelText='Prop Name'
-                      inputStyle={{marginTop: '6px'}}
-                      value={this.state[type][i][nameKey]}
-                      { ...formInputProps }
-                      onChange={(event) => {
-                        this.updatePropName(event.target.value, i, type);
-                      }}
-                      underlineFocusStyle={{borderBottomColor: '#6653ff'}}
-                      floatingLabelFocusStyle={{color: '#6653ff'}}
-                    />
-                  </div>
-                  <div className='col-6'>
-                    <SelectField
-                      floatingLabelText={sourceLabel}
-                      inputStyle={{marginTop: '0px'}}
-                      { ...formInputProps }
-                      value={this.state[type][i][sourceKey]}
-                      disabled={_.isEmpty(this.allProps)}
-                      defaultValue={this.state[type][i][nameKey]}
-                      onChange={(e, k, payload) => {
-                        this.updatePropSource(payload, i, type);
-                      }}
-                      selectedMenuItemStyle={{color: '#6653ff'}}
-                    >
-                      { this.allProps.map((prop, j) => (
-                        <MenuItem
-                          key={j}
-                          insetChildren={true}
-                          checked={prop === this.state[type][j]}
-                          disabled={this.usedProps.has(prop)}
-                          value={prop}
-                          primaryText={prop}
-                        />
-                      ))}
-                    </SelectField>
-                  </div>
-                </div>
-              ))
-            }
-          </div>
-        </div>
       </div>
     );
   }
@@ -324,7 +341,6 @@ class Modal extends React.Component {
       <FlatButton
         label="Submit"
         primary={true}
-        keyboardFocused={true}
         disabled={disableSubmit}
         onClick={() => {
           actions.submitComponentUpdate(this.cleanedForm);
