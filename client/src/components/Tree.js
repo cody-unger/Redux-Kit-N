@@ -80,6 +80,7 @@ const _removeEmptyProps = (props) => {
 
 class Modal extends React.Component {
   constructor(props) {
+    console.log(props.editing.component);
     super(props);
     let {
       actions,
@@ -389,6 +390,7 @@ class Modal extends React.Component {
                   >
                     {menuItems}
                   </SelectField>
+                  
               }
             </div>
 
