@@ -77,11 +77,3 @@ OutputActionsForm = connect(
 )(OutputActionsForm);
 
 export default OutputActionsForm;
-
-// <div className="outputActionsList">
-//           {this.props.outputActions.outputActions.map((outputAction, index) => (
-//             <OutputAction outputAction={outputAction}
-//               index={index}/>
-//           )
-//           )}
-//         </div>
