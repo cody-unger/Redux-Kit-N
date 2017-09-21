@@ -167,6 +167,10 @@ p {
   }
 }
 
+.homeIcon {
+  margin-right: 3px;
+}
+
 .treeBranchNameRow {
   display: flex;
 }

@@ -57,7 +57,7 @@ export const generateTreeArray = (
 
     outputComponents[componentId].children.forEach((child) => {
       traverseOutputComponents(
-        indent + 20,
+        indent + 25,
         child.componentId,
         childAvailableProps,
         childrenInheritConnection
