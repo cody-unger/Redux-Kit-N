@@ -167,7 +167,7 @@ class OutputStoreEdit extends React.Component {
               marginLeft: '-200px',
             }
           }
-          bodyStyle={{ overflowY: 'scroll' }}
+          bodyStyle={{ overflow: 'scroll' }}
           className="outputStoreActionEditFormRow"
         >
           <div>
