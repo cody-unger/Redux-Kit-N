@@ -14,14 +14,10 @@ class SubmitForm extends React.Component {
           name='onion'
           value={JSON.stringify({actions, store, components})}
         />
-        <FlatButton
-          label="Export Application"
-          primary={true}
-          backgroundColor='#6653ff'
-          labelStyle={{color: '#f9f9f9'}}
-          hoverColor='#7F00FF'
-        />
-        
+
+        <button type='submit' id='export-button'>
+          Export Application
+        </button>
       </form>
     );
   }

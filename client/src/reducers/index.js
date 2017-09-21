@@ -15,7 +15,7 @@ const reducer = combineReducers({
 const miscellaneousReducer = (state, action) => {
   switch (action.type) {
     case types.TOGGLE_HELP:
-      state = utils.makeMutableCopy(state, 'help')
+      state = utils.makeMutableCopy(state, 'help');
       if (!state.helpSection) {
         state.helpSection = action.section;
       } else {
@@ -25,7 +25,7 @@ const miscellaneousReducer = (state, action) => {
   }
 
   return state;
-}
+};
 
 const loadReducer = (state, action) => {
   if (action.type === LOAD) {

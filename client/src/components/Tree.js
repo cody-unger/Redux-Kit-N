@@ -306,7 +306,7 @@ class Modal extends React.Component {
           actions={dialogActions}
           modal={false}
           open={this.props.editing}
-          onRequestClose={actions.closeEditComponentModel}
+          onRequestClose={() => { actions.closeEditComponentModel(); }}
         >
           <div className="row">
             <div className="col-lg-6">
@@ -338,7 +338,6 @@ class Modal extends React.Component {
                 this.getPropsForm('parentProps')
             }
           </div>
-
         </Dialog>
       );
     } else {
@@ -370,7 +369,7 @@ class Tree extends React.Component {
           />
         }
 
-                <div className={`tree${this.props.leftBorder}`}>
+        <div className={`tree${this.props.leftBorder}`}>
           {
             utils.tree.generateTreeArray(
               this.props.outputComponents.components,
