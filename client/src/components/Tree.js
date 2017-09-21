@@ -28,7 +28,47 @@ const propKeysByType = {
   storeProps: {nameKey: 'propName', sourceKey: 'storeProp'}
 };
 
-const cleanFormProps = (props) => {
+const cleanFormProps = (state) => {
+  let parentProps = _removeEmptyProps(state.parentProps);
+  let storeProps = _removeEmptyProps(state.storeProps);
+  let warnings = _validateProps(parentProps.concat(storeProps));
+  console.log(warnings);
+  return {parentProps, storeProps, warnings};
+};
+
+const _validateProps = (props) => {
+  let warnings = new Set();
+  let propNames = new Set();
+  for (let prop of props) {
+    let propName = prop.propName !== undefined ?
+      prop.propName :
+      prop.childProp;
+    let source = prop.storeProp !== undefined ?
+      prop.storeProp :
+      prop.parentProp;
+
+    if (propNames.has(propName)) {
+      warnings.add('You may not have duplicate prop names.');
+    } else {
+      propNames.add(propName);
+    }
+
+    if (propName.includes(' ')) {
+      warnings.add('Prop names may not include spaces.');
+    }
+
+    if (
+      (propName === '' && source !== '') ||
+      (propName !== '' && source === '')
+    ) {
+      warnings.add('You must enter values for both fields to add a prop.');
+    }
+  }
+
+  return warnings;
+};
+
+const _removeEmptyProps = (props) => {
   return props.filter(prop => {
     for (let key in prop) {
       if (prop[key] !== '') {
@@ -70,11 +110,9 @@ class Modal extends React.Component {
   }
 
   validate(props, state) {
-    this.validatedForm = {
-      actions: state.actions,
-      parentProps: cleanFormProps(state.parentProps),
-      storeProps: cleanFormProps(state.storeProps),
-    };
+    let {parentProps, storeProps, warnings} = cleanFormProps(state);
+    this.warnings = Array.from(warnings.values());
+    this.cleanedForm = { actions: state.actions, parentProps, storeProps };
   }
 
   refreshPropSources(props, state) {
@@ -152,6 +190,20 @@ class Modal extends React.Component {
     });
   }
 
+  getPropsFormWarnings() {
+    return _.isEmpty(this.warnings) ?
+      null :
+      (
+        <div className="errorMessages">
+          {
+            this.warnings.map((warning, i) => (
+              <div key={i} className="errorMessage"> {warning} </div>
+            ))
+          }
+        </div>
+      );
+  }
+
   getPropsForm(type = 'parentProps') {
     let headerText = type === 'parentProps' ?
       'Props From Parent' :
@@ -181,6 +233,7 @@ class Modal extends React.Component {
           </i>
         </div>
 
+        { this.getPropsFormWarnings() }
         <div style={{display: 'flex'}}>
           <div className='xColumn' style={{flexBasis: '40px', flewGrow: 0}}>
             {
@@ -246,9 +299,6 @@ class Modal extends React.Component {
                           disabled={this.usedProps.has(prop)}
                           value={prop}
                           primaryText={prop}
-                          selectionRenderer={(val)=>{
-                            return val;
-                          }}
                         />
                       ))}
                     </SelectField>
@@ -263,6 +313,7 @@ class Modal extends React.Component {
   }
 
   render() {
+    let disableSubmit = !_.isEmpty(this.warnings);
     const dialogActions = [
       <FlatButton
         label="Cancel"
@@ -274,30 +325,31 @@ class Modal extends React.Component {
         label="Submit"
         primary={true}
         keyboardFocused={true}
+        disabled={disableSubmit}
         onClick={() => {
-          actions.submitComponentUpdate(this.validatedForm);
+          actions.submitComponentUpdate(this.cleanedForm);
           actions.closeEditComponentModel();
         }}
-        labelStyle={{color: '#6653ff'}}
+        labelStyle={_.isEmpty(this.warnings) ? {color: '#6653ff'} : {}}
       />
     ];
 
     if (this.props.editing) {
-      let { actions } = this.state;
+      let formActions = this.state.actions;
       let component = this.props.editing.component;
       let menuItems = this.props.outputActions
         .map((action) => (
           <MenuItem
             key={action.id}
             insetChildren={true}
-            checked={action.id in actions}
+            checked={action.id in formActions}
             value={action.id}
             primaryText={action.name}
           />
         ));
 
       let actionNames = this.props.outputActions
-        .filter(action => action.id in actions)
+        .filter(action => action.id in formActions)
         .map(action => action.name);
 
       return (
@@ -305,8 +357,8 @@ class Modal extends React.Component {
           title={`Edit ${component.name}`}
           actions={dialogActions}
           modal={false}
-          open={this.props.editing}
-          onRequestClose={() => { actions.closeEditComponentModel(); }}
+          open={!!this.props.editing}
+          onRequestClose={() => actions.closeEditComponentModel()}
         >
           <div className="row">
             <div className="col-lg-6">
@@ -317,11 +369,11 @@ class Modal extends React.Component {
               <SelectField
                 multiple={true}
                 hintText={
-                  (_.size(actions) === 0) ?
+                  (_.size(formActions) === 0) ?
                     'Select a name' :
                     ''
                 }
-                values={Object.keys(actions)}
+                values={Object.keys(formActions)}
                 onChange={this.updateActions}
                 selectionRenderer={(values) => {
                   return actionNames.join(', ');
@@ -353,9 +405,9 @@ class Tree extends React.Component {
         <div className="appTreeHeading" >
           <h4>App Tree</h4>
           <i
-              className="material-icons addButton pointer purple"
-              onClick={() => actions.toggleHelp('COMPONENT_TREE')}
-            >
+            className="material-icons addButton pointer purple"
+            onClick={() => actions.toggleHelp('COMPONENT_TREE')}
+          >
             help_outline
           </i>
         </div>
