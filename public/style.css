@@ -418,7 +418,7 @@ textarea:focus {
   }
 }
 
-#export-button {
+#exportButton {
   border: 10px;
   color: white;
   display: inline-block;
@@ -430,6 +430,15 @@ textarea:focus {
   text-align: center;
 }
 
-#export-button:hover {
+#exportButton:hover {
   background-color: #7565fb;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 14px;
+}
+
+.errorMessages {
+  margin-bottom: 3px;
 }

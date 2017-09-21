@@ -44,13 +44,13 @@ class OutputStoreEdit extends React.Component {
           :
           '';
       }
-      
+
       if (!isElementSchema) {
-        if (this.state.name === '' 
-            || this.state.name.indexOf(' ') >= 0 
+        if (this.state.name === ''
+            || this.state.name.indexOf(' ') >= 0
             || this.state.name.indexOf('.') >= 0
             || (editing.targetName
-                && (`${targetNameWithoutLast}${this.state.name}` !== editing.targetName 
+                && (`${targetNameWithoutLast}${this.state.name}` !== editing.targetName
                   || this.state.name === 'newProperty' && last === 'newProperty')
                 && `${targetNameWithoutLast}${this.state.name}` in this.props.targets)
         ) {
@@ -142,7 +142,6 @@ class OutputStoreEdit extends React.Component {
       <FlatButton
         label="Submit"
         primary={true}
-        keyboardFocused={true}
         onClick={this.handleSubmit.bind(this)}
         labelStyle={{color: '#6653ff'}}
       />
@@ -168,11 +167,7 @@ class OutputStoreEdit extends React.Component {
               marginLeft: '-200px',
             }
           }
-          bodyStyle={
-            {
-              overflow: 'scroll'
-            }
-          }
+          bodyStyle={{ overflow: 'scroll' }}
           className="outputStoreActionEditFormRow"
         >
           <div>
