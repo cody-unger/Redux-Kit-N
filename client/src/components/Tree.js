@@ -347,9 +347,9 @@ class Modal extends React.Component {
           <MenuItem
             key={action.id}
             insetChildren={true}
-            checked={action.id in formActions}
             value={action.id}
             primaryText={action.name}
+            style={action.id in formActions && {color: '#6653ff'}}
           />
         ));
 

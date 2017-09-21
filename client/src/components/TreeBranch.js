@@ -198,6 +198,8 @@ class TreeBranch extends React.Component {
 
           { this.getActionIcons() }
 
+          { !this.state.hover && <div className="editPlaceHolder"></div> }
+
           {
             this.state.connectStoreError &&
             <div className="red">Only connect 1 tree level</div>
