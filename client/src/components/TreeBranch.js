@@ -85,7 +85,7 @@ class TreeBranch extends React.Component {
         return (
           <i
             key={i}
-            className={'material-icons pointer ' + (icon.class || '')}
+            className={'material-icons purple pointer ' + (icon.class || '')}
             onClick={icon.onClick}
           >
             {icon.icon}
@@ -183,6 +183,7 @@ class TreeBranch extends React.Component {
           onMouseLeave={this.handleMouseLeave.bind(this)}
           ref={row => this.anchor = row}
         >
+          <i className="material-icons">subdirectory_arrow_right</i>
           <div
             className={`treeBranchName${underline}`}
             onDragOver={this.handleDragOver.bind(this)}

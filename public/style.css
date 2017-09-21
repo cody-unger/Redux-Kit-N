@@ -120,9 +120,8 @@ p {
 }
 
 .outputComponentListItemName {
-  width: 75%;
   height: 100%;
-  font-weight: bold;
+  margin-right: 1em;
 }
 
 .outputComponentListItemInput {
@@ -172,7 +171,6 @@ p {
 
 .treeBranchName {
   margin-right: 15px;
-  font-weight: bold;
 }
 
 .outputPropsActionsBorderContainer {
