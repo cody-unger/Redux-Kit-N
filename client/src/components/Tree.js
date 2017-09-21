@@ -294,7 +294,7 @@ class Modal extends React.Component {
       'No properties have been declared in your store.';
 
     return (
-      <div className='col-lg-6'>
+      <div className='col-lg-7'>
         <div style={{display: 'flex'}}>
           <h5> {headerText} </h5>
           <i
@@ -366,7 +366,7 @@ class Modal extends React.Component {
           onRequestClose={() => actions.closeEditComponentModel()}
         >
           <div className="row">
-            <div className="col-lg-6">
+            <div className="col-lg-5">
               <h5>
                 Actions
               </h5>
