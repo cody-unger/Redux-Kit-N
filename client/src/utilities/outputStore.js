@@ -112,9 +112,9 @@ export const convertPropertiesIntoObject = (properties) => {
       }
     });
   };
-
+  console.log(properties);
   properties.forEach((property) => {
-    if (property.initialValue === '') {
+    if (property.initialValue === '' || property.initialValue === undefined) {
       if (property.type === 'String') {
         initialState[property.name] = '';
 
