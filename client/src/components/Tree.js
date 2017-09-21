@@ -350,16 +350,15 @@ class Tree extends React.Component {
   render() {
     return (
       <div className={this.props.colWidth}>
-        <h4 className="appTreeHeading" >
-          App Tree
-
+        <div className="appTreeHeading" >
+          <h4>App Tree</h4>
           <i
-            className="material-icons addButton pointer purple"
-            onClick={() => actions.toggleHelp('COMPONENT_TREE')}
-          >
+              className="material-icons addButton pointer purple"
+              onClick={() => actions.toggleHelp('COMPONENT_TREE')}
+            >
             help_outline
           </i>
-        </h4>
+        </div>
         {
           this.props.outputComponents.editing &&
           <Modal
