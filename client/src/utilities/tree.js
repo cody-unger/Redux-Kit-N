@@ -93,7 +93,7 @@ export const checkForConnectedDescendants = (componentId, outputComponents) => {
   );
 };
 
-export const applyToComponentTree = (componentTree, callback, test, stop) => {
+export const applyToComponentTree = (componentTree, callback, root = 0, test, stop) => {
   test = test || function() { return true; };
 
   const _recurse = (id, component, history = []) => {
@@ -102,7 +102,6 @@ export const applyToComponentTree = (componentTree, callback, test, stop) => {
     if (resolvedTest) {
       callback(id, component, history);
     }
-
 
     let shouldContinue = (
       (stop === undefined) ||
@@ -119,26 +118,19 @@ export const applyToComponentTree = (componentTree, callback, test, stop) => {
       }
     }
   };
-  _recurse(0, componentTree[0], []);
+  _recurse(root, componentTree[root], []);
 };
 
 export const isComponentAncestor = (outputComponents, testId, descendantId) => {
-  let pathsToDescendant = [];
+  let descendantFound = false;
 
-  applyToComponentTree (
+  applyToComponentTree(
     outputComponents,
-    (id, component, history) => pathsToDescendant.push(history),
-    (id, component, history) => {
-      return id === descendantId;
-    },
+    () => descendantFound = true,
+    testId,
+    (id) => id === descendantId,
     'success'
   );
 
-  for (let path of pathsToDescendant) {
-    if (_.includes(path, testId)) {
-      return true;
-    }
-  }
-
-  return false;
+  return descendantFound;
 };
