@@ -34,8 +34,7 @@ class OutputActionsEdit extends React.Component {
       if (index !== this.props.outputActions.editing.index) {
         return outputAction.name;
       }
-    }
-    );
+    });
     if (this.state.name === '' || this.state.name.indexOf(' ') >= 0 || names.includes(this.state.name)) {
       this.setState({invalidName: true});
 

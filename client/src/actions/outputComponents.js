@@ -20,6 +20,11 @@ export const submitComponentUpdate = (update) => ({
   update
 });
 
+export const removeDeletedActionFromComponents = (outputAction) => ({
+  type: types.REMOVE_DELETED_ACTION_FROM_COMPONENTS,
+  outputAction
+});
+
 export const closeEditComponentModel = () => ({
   type: types.CLOSE_EDIT_COMPONENT_MODAL
 });

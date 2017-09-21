@@ -16,7 +16,7 @@ const outputActionsReducer = (state = initialState, action = {}) => {
       let nextId = state.nextId + 1;
       state = utils.safeSet(state, nextId, 'nextId');
       return state;
-        
+
     case types.EDIT_OUTPUT_ACTION:
       return utils.safeSet(state, action.outputAction, `outputActions.${action.index}`);
 
@@ -39,7 +39,6 @@ const outputActionsReducer = (state = initialState, action = {}) => {
           state = utils.safeSet(state, undefined, `outputActions.${index}.target`);
           state = utils.safeSet(state, undefined, `outputActions.${index}.type`);
         }
-
       });
 
       return state;

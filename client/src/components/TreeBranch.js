@@ -102,7 +102,7 @@ class TreeBranch extends React.Component {
           <b> Props From Store: </b>
           {
             _.isEmpty(this.props.outputComponent.storeProps) ?
-              <p> 'No Props Specified' </p> :
+              <p> No Props Specified </p> :
               <ul>
                 {
                   this.props.outputComponent.storeProps.map((prop, i) => (
@@ -204,8 +204,8 @@ class TreeBranch extends React.Component {
           }
         </div>
 
-        
-          
+
+
         <Popover
           open={this.state.hover}
           anchorEl={this.anchor}
@@ -222,7 +222,7 @@ class TreeBranch extends React.Component {
             {this.getActions()}
           </div>
         </Popover>
-        
+
       </div>
     );
   }

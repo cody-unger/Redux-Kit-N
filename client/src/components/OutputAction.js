@@ -28,6 +28,7 @@ class OutputAction extends React.Component {
 
   handleClickRemove() {
     actions.removeOutputAction(this.props.index);
+    actions.removeDeletedActionFromComponents(this.props.outputAction.id);
   }
 
   handleMouseEnter() {
@@ -40,16 +41,16 @@ class OutputAction extends React.Component {
 
   render() {
     return (
-      <TableRow onMouseEnter={this.handleMouseEnter.bind(this)} 
+      <TableRow onMouseEnter={this.handleMouseEnter.bind(this)}
         onMouseLeave={this.handleMouseLeave.bind(this)}>
         <TableRowColumn style={{paddingLeft: '0', paddingRight: '0', textAlign: 'center'}}>{this.props.outputAction.name}</TableRowColumn>
         <TableRowColumn style={{paddingLeft: '0', paddingRight: '0', textAlign: 'center'}}>{this.props.outputAction.target || 'no target'}</TableRowColumn>
         <TableRowColumn style={{paddingLeft: '0', paddingRight: '0', textAlign: 'center'}}>{this.props.outputAction.type || 'no type'}</TableRowColumn>
         {this.state.hover ?
           <TableRowColumn style={{paddingLeft: '0', paddingRight: '0'}}>
-            <i className="material-icons pointer outputActionEditDelete purple" 
+            <i className="material-icons pointer outputActionEditDelete purple"
               onClick={this.handleClickEdit.bind(this)}>mode_edit</i>
-            <i className="material-icons pointer purple" 
+            <i className="material-icons pointer purple"
               onClick={this.handleClickRemove.bind(this)}>clear</i>
           </TableRowColumn>
           :

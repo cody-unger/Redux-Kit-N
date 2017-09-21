@@ -22,7 +22,6 @@ const initialState = {
 
 const outputComponentsReducer = (state = initialState, action = {}) => {
   let newState;
-
   try {
     switch (action.type) {
 
@@ -72,6 +71,18 @@ const outputComponentsReducer = (state = initialState, action = {}) => {
 
       case types.UPDATE_COMPONENT_NAME:
         return safeSet(state, action.name, `components.${action.id}.name`);
+
+      case types.REMOVE_DELETED_ACTION_FROM_COMPONENTS:
+        let { outputAction } = action;
+        newState = makeMutableCopy(state, 'state.components.0');
+
+        _.forEach(state.components, (component, id) => {
+          if (component.actions[outputAction]) {
+            newState.components[id] = safeDelete(component, `actions.${outputAction}`);
+          }
+        });
+
+        return newState;
 
       case types.REMOVE_COMPONENT:
         if (action.id === '0') {
