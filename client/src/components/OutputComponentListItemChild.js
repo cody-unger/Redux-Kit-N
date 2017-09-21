@@ -29,7 +29,7 @@ class OutputComponentListItemChild extends React.Component {
         onMouseEnter={this.handleMouseEnter.bind(this)}
         onMouseLeave={this.handleMouseLeave.bind(this)}>
         <div>{this.props.name}</div>
-        {this.state.hover && <i className="material-icons pointer red"
+        {this.state.hover && <i className="material-icons pointer purple"
           onClick={this.handleClickRemove.bind(this)}>backspace</i>}
       </div>
     );

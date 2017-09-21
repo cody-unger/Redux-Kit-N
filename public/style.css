@@ -92,7 +92,8 @@ p {
 
 .outputComponents {
   width: 100%;
-  height: 28em;
+  /*height: 28em;*/
+  height: 69vh;
   border-bottom: 2px solid #696969;
   overflow: scroll;
   padding: 5px 5px 5px 5px;
@@ -120,9 +121,8 @@ p {
 }
 
 .outputComponentListItemName {
-  width: 75%;
   height: 100%;
-  font-weight: bold;
+  margin-right: 1em;
 }
 
 .outputComponentListItemInput {
@@ -147,7 +147,8 @@ p {
 
 .tree {
   width: 100%;
-  height: 28em;
+  /*height: 28em;*/
+  height: 69vh;
   border-bottom: 2px solid #696969;
   overflow: scroll;
   padding: 5px 5px 5px 5px;
@@ -166,13 +167,16 @@ p {
   }
 }
 
+.homeIcon {
+  margin-right: 3px;
+}
+
 .treeBranchNameRow {
   display: flex;
 }
 
 .treeBranchName {
   margin-right: 15px;
-  font-weight: bold;
 }
 
 .outputPropsActionsBorderContainer {
@@ -272,7 +276,8 @@ p {
 .outputStoreFormTextArea {
   overflow: scroll;
   width: 100%;
-  height: 28em;
+  /*height: 28em;*/
+  height: 69vh;
   border-bottom: 2px solid #696969;
   border-top: none;
   border-right: none;
@@ -345,7 +350,8 @@ textarea:focus {
 }
 
 .outputActionsList {
-  height: 28em;
+  /*height: 28em;*/
+  height: 69vh;
   overflow-y: scroll;
   border-bottom: 2px solid #696969;
 }
@@ -420,6 +426,10 @@ textarea:focus {
   padding: 8px 16px;
   position: relative;
   border-radius: 2px;
-  background-color: rgb(102, 83, 255);
+  background-color: #6653ff;
   text-align: center;
+}
+
+#export-button:hover {
+  background-color: #7565fb;
 }
