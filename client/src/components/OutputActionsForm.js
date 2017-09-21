@@ -28,8 +28,18 @@ class OutputActionsForm extends React.Component {
       <div className={this.props.colWidth}>
         <div className="outputActionsHeading">
           <h4>Actions</h4>
-          <i className="material-icons addButton pointer purple"
-            onClick={this.handleClickAdd.bind(this)}>add</i>
+          <i
+            className="material-icons addButton pointer purple"
+            onClick={this.handleClickAdd.bind(this)}
+          >
+            add
+          </i>
+          <i
+            className="material-icons addButton pointer purple"
+            onClick={() => actions.toggleHelp('ACTIONS_FORM')}
+          >
+            help_outline
+          </i>
         </div>
         <div className={`outputActionsList${this.props.leftBorder}`}>
           <Table fixedHeader={true} height='21.6em' style={{backgroundColor: '#f9f9f9'}}>

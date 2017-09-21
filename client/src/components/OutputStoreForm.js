@@ -51,16 +51,26 @@ class OutputStoreForm extends React.Component {
       <div className={this.props.colWidth}>
         <div className="outputStoreSchemaHeading">
           <h4>Store Schema</h4>
-          <i className="material-icons addButton pointer purple"
-            onClick={this.handleClickAdd.bind(this)}>add</i>
+          <i
+            className="material-icons addButton pointer purple"
+            onClick={this.handleClickAdd.bind(this)}
+          >
+            add
+          </i>
+          <i
+            className="material-icons addButton pointer purple"
+            onClick={() => actions.toggleHelp('STORE_FORM')}
+          >
+            help_outline
+          </i>
         </div>
-        <div className={`outputStoreFormTextArea${this.props.leftBorder}`}> 
+        <div className={`outputStoreFormTextArea${this.props.leftBorder}`}>
           {utilities.outputStore.generateStoreArray(this.props.outputStore.properties, OutputStoreRow, actions.toggleEditStoreModal)}
         </div>
         <OutputStoreEdit targets={utilities.outputStore.getTargetsFromOutputStore(this.props.outputStore.properties)}/>
       </div>
     );
-  }  
+  }
 }
 
 OutputStoreForm = connect(

@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import reducer from './reducers';
 import store from './reduxStore';
+import HelpModal from './components/help/HelpModal';
 import OutputComponentList from './components/OutputComponentList';
 import Tree from './components/Tree';
 import OutputStoreForm from './components/OutputStoreForm';
-import OutputActionsForm from './components/OutputActionsForm';
-import SubmitForm from './components/SubmitForm';
+import OutputActionsForm from './components/OutputActionsForm'; import SubmitForm from './components/SubmitForm';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { CSSTransitionGroup } from 'react-transition-group';
 
@@ -53,8 +53,8 @@ class ConnectedApp extends React.Component {
       ' noLeftBorder'
       :
       ' leftBorder';
-    let leftBorderActions = !this.state.displayOutputComponentsList 
-                              && !this.state.displayTree 
+    let leftBorderActions = !this.state.displayOutputComponentsList
+                              && !this.state.displayTree
                               && !this.state.displayOutputStoreForm ?
       ' noLeftBorder'
       :
@@ -103,22 +103,23 @@ class ConnectedApp extends React.Component {
                 </ul>
               </div>
             </nav>
-            
+
             <CSSTransitionGroup className="row no-gutters pageContent"
               transitionName="pageSection"
               transitionEnterTimeout={500}
               transitionLeave={false}>
-              {this.state.displayOutputComponentsList && 
+              {this.state.displayOutputComponentsList &&
                 <OutputComponentList key={1} colWidth={`col-lg-${12 / this.state.displays} pageSection`} />}
-              {this.state.displayTree && 
+              {this.state.displayTree &&
                 <Tree key={2} colWidth={`col-lg-${12 / this.state.displays} pageSection`} leftBorder={leftBorderTree} />}
-              {this.state.displayOutputStoreForm && 
+              {this.state.displayOutputStoreForm &&
                 <OutputStoreForm key={3} colWidth={`col-lg-${12 / this.state.displays} pageSection`} leftBorder={leftBorderStore} />}
-              {this.state.displayOutputActionsForm && 
+              {this.state.displayOutputActionsForm &&
                 <OutputActionsForm key={4} colWidth={`col-lg-${12 / this.state.displays} pageSection`} leftBorder={leftBorderActions} />}
             </CSSTransitionGroup>
-            
+
             <SubmitForm />
+            <HelpModal />
           </div>
         </MuiThemeProvider>
       </Provider>

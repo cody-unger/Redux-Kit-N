@@ -23,8 +23,18 @@ class OutputComponentList extends React.Component {
       <div className={this.props.colWidth}>
         <div className="outputComponentsHeading">
           <h4>Components</h4>
-          <i className="material-icons addButton pointer purple"
-            onClick={this.handleClickAdd}>add</i>
+          <i
+            className="material-icons addButton pointer purple"
+            onClick={this.handleClickAdd}
+          >
+            add
+          </i>
+          <i
+            className="material-icons addButton pointer purple"
+            onClick={() => actions.toggleHelp('COMPONENT_LIST')}
+          >
+            help_outline
+          </i>
         </div>
         <div className="outputComponents">
           {_.map(this.props.outputComponents.components, (outputComponent, id) => (
