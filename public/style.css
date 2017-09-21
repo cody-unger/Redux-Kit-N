@@ -426,6 +426,10 @@ textarea:focus {
   padding: 8px 16px;
   position: relative;
   border-radius: 2px;
-  background-color: rgb(102, 83, 255);
+  background-color: #6653ff;
   text-align: center;
+}
+
+#export-button:hover {
+  background-color: #7565fb;
 }
