@@ -34,6 +34,7 @@ class HelpModal extends React.Component {
         title={titles[this.props.helpSection]}
         modal={false}
         open={!!this.props.helpSection}
+        onRequestClose={() => actions.toggleHelp()}
       >
         { content[this.props.helpSection] }
       </Dialog>
