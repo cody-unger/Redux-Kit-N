@@ -412,3 +412,14 @@ textarea:focus {
   }
 }
 
+#export-button {
+  border: 10px;
+  color: white;
+  display: inline-block;
+  cursor: pointer;
+  padding: 8px 16px;
+  position: relative;
+  border-radius: 2px;
+  background-color: rgb(102, 83, 255);
+  text-align: center;
+}
