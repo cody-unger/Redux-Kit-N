@@ -118,9 +118,6 @@ p {
 .outputComponentListItem {
   display: flex;
   height: 25px;
-  width: fit-content;
-  width: -moz-fit-content;
-  width: -webkit-fit-content;
 }
 
 .outputComponentListItemName {
@@ -134,14 +131,14 @@ p {
 
 .outputComponentChild {
   display: flex;
-  justify-content: space-between;
   margin-left: 20px;
-  width: fit-content;
-  width: -moz-fit-content;
-  width: -webkit-fit-content;
 }
 
 .outputComponentChild {
+  margin-right: 1em;
+}
+
+.outputComponentChildName {
   margin-right: 1em;
 }
 
