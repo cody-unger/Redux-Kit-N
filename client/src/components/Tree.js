@@ -117,7 +117,7 @@ class Modal extends React.Component {
 
   refreshPropSources(props, state) {
     if ( props.editing.component.connected ) {
-      this.allProps = Object.keys(
+      this.availableProps = Object.keys(
         utils.outputStore.getTargetsFromOutputStore(
           props.outputStore.properties
         )
@@ -127,7 +127,7 @@ class Modal extends React.Component {
         _.map(state.storeProps, prop => prop.storeProp)
       );
     } else {
-      this.allProps = Object.keys(this.props.editing.availableProps || {});
+      this.availableProps = Object.keys(this.props.editing.availableProps || {});
 
       this.usedProps = new Set(
         _.map(state.parentProps, prop => prop.parentProp)
@@ -217,6 +217,15 @@ class Modal extends React.Component {
       'Parent Prop Name' :
       'Store Path';
 
+    let availablePropsSet = new Set(this.availableProps);
+    let getSourceOptions = (selection) => {
+      return Array.from(
+        availablePropsSet.has(selection) ?
+          this.availableProps :
+          [selection].concat(this.availableProps)
+      );
+    };
+
     return (
       <div style={{display: 'flex'}}>
         <div className='xColumn'>
@@ -257,23 +266,23 @@ class Modal extends React.Component {
                     inputStyle={{marginTop: '0px'}}
                     { ...formInputProps }
                     value={this.state[type][i][sourceKey]}
-                    disabled={_.isEmpty(this.allProps)}
-                    defaultValue={this.state[type][i][nameKey]}
+                    disabled={_.isEmpty(this.availableProps)}
                     onChange={(e, k, payload) => {
                       this.updatePropSource(payload, i, type);
                     }}
                     selectedMenuItemStyle={{color: '#6653ff'}}
                   >
-                    { this.allProps.map((prop, j) => (
-                      <MenuItem
-                        key={j}
-                        insetChildren={true}
-                        checked={prop === this.state[type][j]}
-                        disabled={this.usedProps.has(prop)}
-                        value={prop}
-                        primaryText={prop}
-                      />
-                    ))}
+                    { getSourceOptions(this.state[type][i][sourceKey])
+                      .map((prop, j) => (
+                        <MenuItem
+                          key={j}
+                          insetChildren={true}
+                          disabled={this.usedProps.has(prop)}
+                          value={prop}
+                          primaryText={prop}
+                        />
+                      ))
+                    }
                   </SelectField>
                 </div>
               </div>
@@ -306,7 +315,7 @@ class Modal extends React.Component {
         </div>
 
         {
-          _.isEmpty(this.allProps) ?
+          _.isEmpty(this.availableProps) ?
             noSourcesMessage :
             <div>
               { this.getPropsFormWarnings() }
@@ -390,7 +399,7 @@ class Modal extends React.Component {
                   >
                     {menuItems}
                   </SelectField>
-                  
+
               }
             </div>
 
