@@ -41,6 +41,9 @@ class OutputComponentList extends React.Component {
             <OutputComponentListItem outputComponents={this.props.outputComponents.components} outputComponent={outputComponent} id={id} key={id} />
           )
           )}
+          {Object.keys(this.props.outputComponents.components).length === 1 &&
+            <div className="emptyPromptContainer"><div className="emptyPrompt">Add components with the plus icon</div></div>
+          }
         </div>
       </div>
     );

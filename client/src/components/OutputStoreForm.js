@@ -66,6 +66,9 @@ class OutputStoreForm extends React.Component {
         </div>
         <div className={`outputStoreFormTextArea${this.props.leftBorder}`}>
           {utilities.outputStore.generateStoreArray(this.props.outputStore.properties, OutputStoreRow, actions.toggleEditStoreModal)}
+          {this.props.outputStore.properties.length === 0 &&
+            <div className="emptyPromptContainer"><div className="emptyPrompt emptyPromptStore">Add properties with the plus icon</div></div>
+          }
         </div>
         <OutputStoreEdit targets={utilities.outputStore.getTargetsFromOutputStore(this.props.outputStore.properties)}/>
       </div>

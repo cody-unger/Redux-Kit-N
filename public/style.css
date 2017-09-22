@@ -457,3 +457,27 @@ textarea:focus {
   flex-basis: 40px;
   flew-grow: 0;
 }
+
+.emptyPrompt {
+  font-weight: bold;
+  color: #bbb;
+  font-size: 150%;
+  text-align: center;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.emptyPromptStore {
+  margin-top: 2em;
+}
+
+.emptyPromptActions {
+  margin-bottom: 2.6em;
+}
+
+.emptyPromptContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+}
