@@ -13,21 +13,45 @@ const outputStoreReducer = (state = initialState, action = {}) => {
   switch (action.type) {
 
     case types.SET_OUTPUT_STORE_PROPERTY: {
+      let pathString = utils.outputStore.buildPropertiesPath(action.path);
+      
+      let getOldProperty = () => {
+        let keys = pathString.split('.');
+        let currentValue = state;
+        
+        keys.forEach((key) => {
+          currentValue = currentValue[key];
+        });
+
+        return currentValue;
+      }
+
+      let oldProperty = getOldProperty();
+
       if (
         action.property.type === 'Object' &&
-      !('properties' in action.property)
+      (action.isNewProperty || !oldProperty.hasOwnProperty('properties'))
       ) {
         action.property.properties = [];
+
+      } else if (action.property.type === 'Object') {
+        action.property.properties = oldProperty.properties;
+
       }
 
       if (
         action.property.type === 'Array' &&
-      !('elementSchema' in action.property)
+      (action.isNewProperty || !oldProperty.hasOwnProperty('elementSchema'))
       ) {
         action.property.elementSchema = {};
+
+      } else if (action.property.type === 'Array') {
+        action.property.elementSchema = oldProperty.elementSchema;
+
       }
 
-      let pathString = utils.outputStore.buildPropertiesPath(action.path);
+      console.log(utils.safeSet(state, action.property, pathString));
+
       return utils.safeSet(state, action.property, pathString);
     }
 
@@ -43,6 +67,7 @@ const outputStoreReducer = (state = initialState, action = {}) => {
       } else {
         let path = action.path;
         let targetName = action.targetName;
+        let isNewProperty = action.isNewProperty;
         let lookupKeys = path.slice(0, path.length - 1);
         let finalKey = path[path.length - 1];
         let nestedObj = state.properties;
@@ -54,7 +79,7 @@ const outputStoreReducer = (state = initialState, action = {}) => {
           }
         });
 
-        state = utils.safeSet(state, {path, targetName, property: nestedObj[finalKey] || {}}, 'editing');
+        state = utils.safeSet(state, {path, targetName, isNewProperty, property: nestedObj[finalKey] || {}}, 'editing');
       }
 
       return state;

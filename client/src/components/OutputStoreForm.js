@@ -43,7 +43,7 @@ class OutputStoreForm extends React.Component {
   }
 
   handleClickAdd() {
-    actions.toggleEditStoreModal(['newProperty'], 'newProperty');
+    actions.toggleEditStoreModal(['newProperty'], 'newProperty', true);
   }
 
   render() {
