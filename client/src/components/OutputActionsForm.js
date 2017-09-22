@@ -42,7 +42,7 @@ class OutputActionsForm extends React.Component {
           </i>
         </div>
         <div className={`outputActionsList${this.props.leftBorder}`}>
-          <Table fixedHeader={true} 
+          <Table fixedHeader={true}
             height={this.props.outputActions.outputActions.length ? '24em' : '0'}
             style={{backgroundColor: '#f9f9f9'}}>
             <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
@@ -63,7 +63,7 @@ class OutputActionsForm extends React.Component {
             </TableBody>
           </Table>
           {this.props.outputActions.outputActions.length === 0 &&
-            <div className="emptyPromptContainer"><div className="emptyPrompt emptyPromptActions">Add actions with the plus icon</div></div>
+            <div className="emptyPromptContainer"><div className="emptyPrompt emptyPromptActions">Add Actions with the plus icon</div></div>
           }
         </div>
         <OutputActionsEdit targetsTypes={utilities.outputStore.getTargetsFromOutputStore(this.props.outputStore.properties)}/>
