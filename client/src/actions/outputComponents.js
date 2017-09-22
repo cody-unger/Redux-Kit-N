@@ -93,3 +93,9 @@ export const removeParentPropFromComponent = (id, parentProp) => ({
   id,
   parentProp
 });
+
+export const editStorePropOnComponent = (oldOutputStoreProp, newOutputStoreProp) => ({
+  type: types.EDIT_STORE_PROP_ON_COMPONENT,
+  oldOutputStoreProp,
+  newOutputStoreProp
+});
