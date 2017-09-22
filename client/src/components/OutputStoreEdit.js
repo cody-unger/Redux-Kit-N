@@ -71,14 +71,16 @@ class OutputStoreEdit extends React.Component {
           initialValue = JSON.stringify(initialValue);
         }
       }
-
-      let setProperty = isElementSchema ? {type: this.state.type || undefined} : {name: this.state.name, initialValue, type: this.state.type};
       
-      actions.setOutputStoreProperty(setProperty, editing.path);
-      actions.editStorePropOnComponent(this.props.outputStore.editing.targetName, `${targetNameWithoutLast}${this.state.name}`);
+      let setProperty = isElementSchema ? {type: this.state.type || undefined} : {name: this.state.name, initialValue, type: this.state.type};
+      // let isNewProperty = editing.targetName.slice(editing.targetName.length - 11) === 'newProperty' ? true : false;      
+
+      actions.setOutputStoreProperty(setProperty, editing.path, editing.isNewProperty);
+      editing.targetName && actions.editStorePropOnComponent(editing.targetName, `${targetNameWithoutLast}${this.state.name}`);
       actions.toggleEditStoreModal(editing.path);
 
     } catch (error) {
+      console.log(error);
       if (error === 'name') {
         this.setState({invalidName: true});
       } else if (error === 'type') {

@@ -8,16 +8,18 @@ export const setOutputStore = (newOutputStore, lastUpdatedBy) => (
   }
 );
 
-export const toggleEditStoreModal = (path, targetName) => ({
+export const toggleEditStoreModal = (path, targetName, isNewProperty) => ({
   type: types.TOGGLE_EDIT_STORE_MODAL,
   path,
-  targetName
+  targetName,
+  isNewProperty
 });
 
-export const setOutputStoreProperty = (property, path) => ({
+export const setOutputStoreProperty = (property, path, isNewProperty) => ({
   type: types.SET_OUTPUT_STORE_PROPERTY,
   property,
-  path
+  path,
+  isNewProperty
 });
 
 export const removeOutputStoreProperty = (path) => ({

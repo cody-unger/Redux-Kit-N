@@ -45,7 +45,7 @@ export const generateStoreArray = (outputStore, OutputStoreRow, toggleEditModal)
             <div style={{marginLeft: indent + 40 + 'px', textDecoration: 'underline'}}>Properties</div>
             <i className="material-icons addButton pointer purple"
               onClick={() => {
-                toggleEditModal(path.concat('newProperty'), null);
+                toggleEditModal(path.concat('newProperty'), null, true);
               }}>add</i>
           </div>
         );
@@ -71,7 +71,7 @@ export const generateStoreArray = (outputStore, OutputStoreRow, toggleEditModal)
               <div style={{marginLeft: indent + 40 + 'px', textDecoration: 'underline'}}>Properties</div>
               <i className="material-icons addButton pointer purple"
                 onClick={() => {
-                  toggleEditModal(path.concat([index, 'newProperty']), targetName ? `${targetName}newProperty` : null);
+                  toggleEditModal(path.concat([index, 'newProperty']), targetName ? `${targetName}newProperty` : null, true);
                 }}>add</i>
             </div>
           );

@@ -253,9 +253,11 @@ const outputComponentsReducer = (state = initialState, action = {}) => {
 
         let components = state.components;
         for (let component in components) {
+
           for (let i = components[component].storeProps.length - 1; i >= 0; i--) {
+            
             if (components[component].storeProps[i].storeProp === oldOutputStoreProp
-                || components[component].storeProps[i].storeProp.slice(0, outputStorePropLength + 1) === `${outputStoreProp}.`) {
+                || components[component].storeProps[i].storeProp.slice(0, outputStorePropLength + 1) === `${oldOutputStoreProp}.`) {
               
               newState = safeSet(
                 state,
@@ -266,7 +268,7 @@ const outputComponentsReducer = (state = initialState, action = {}) => {
             }
           }
         }
-
+        console.log(newOutputStoreProp);
         return newState;
       }
 
