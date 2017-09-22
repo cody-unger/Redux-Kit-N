@@ -80,11 +80,17 @@ class ConnectedApp extends React.Component {
                 <i className="material-icons white pointer">menu</i>
               </button>
               <h1 className="navbar-brand">
-                <img src="redux-kit-n-white.png" style={{
-                  height:'40px',
-                  marginRight: '1em',
-                  marginTop: '-.3em'
-                }}></img>
+                <a href="">
+                  <img
+                    src="redux-kit-n-white.png"
+                    rel="icon"
+                    style={{
+                      height:'40px',
+                      marginRight: '1em',
+                      marginTop: '-.3em'
+                    }}
+                  ></img>
+                </a>
                 <a href="" className="navbar-brand">Redux-Kit-N</a>
               </h1>
               <div className="collapse navbar-collapse white" id="navbarSupportedContent">
