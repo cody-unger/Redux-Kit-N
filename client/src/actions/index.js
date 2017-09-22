@@ -10,7 +10,11 @@ let toggleHelp = (section) => ({
   section: section
 });
 
-let miscellaneousActions = { toggleHelp };
+let reset = () => ({
+  type: types.RESET
+});
+
+let miscellaneousActions = { toggleHelp, reset };
 
 const actions = _.extend(
   {},

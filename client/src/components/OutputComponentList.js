@@ -42,7 +42,7 @@ class OutputComponentList extends React.Component {
           )
           )}
           {Object.keys(this.props.outputComponents.components).length === 1 &&
-            <div className="emptyPromptContainer"><div className="emptyPrompt">Add components with the plus icon</div></div>
+            <div className="emptyPromptContainer"><div className="emptyPrompt">Add Components with the plus icon</div></div>
           }
         </div>
       </div>

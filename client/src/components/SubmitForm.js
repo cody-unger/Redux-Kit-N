@@ -1,8 +1,13 @@
 import React from 'react';
+import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import _ from 'lodash';
 import FlatButton from 'material-ui/FlatButton';
 import utilities from '../utilities/index';
+
+import store from '../reduxStore';
+import unboundActions from '../actions';
+let boundActions = bindActionCreators(unboundActions, store.dispatch);
 
 class SubmitForm extends React.Component {
   render() {
@@ -16,8 +21,17 @@ class SubmitForm extends React.Component {
           name='onion'
           value={JSON.stringify({actions, store, components})}
         />
-
-        <button type='submit' id='exportButton'>
+        <button
+          type='button'
+          className='materialOutlineButton'
+          style={{
+            marginRight: '30px'
+          }}
+          onClick={boundActions.reset}
+        >
+          Reset Application
+        </button>
+        <button type='submit' className='materialButton'>
           Export Application
         </button>
       </form>

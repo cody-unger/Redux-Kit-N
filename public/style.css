@@ -421,7 +421,7 @@ textarea:focus {
   }
 }
 
-#exportButton {
+.materialButton, .materialOutlineButton:hover {
   border: 10px;
   color: white;
   display: inline-block;
@@ -430,10 +430,24 @@ textarea:focus {
   position: relative;
   border-radius: 2px;
   background-color: #6653ff;
+  border: solid #6653ff 1px;
   text-align: center;
 }
 
-#exportButton:hover {
+.materialOutlineButton {
+  border: 10px;
+  color: #6653ff;
+  display: inline-block;
+  cursor: pointer;
+  padding: 8px 16px;
+  position: relative;
+  border-radius: 2px;
+  border: solid #6653ff 1px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.materialButton:hover {
   background-color: #7565fb;
 }
 
