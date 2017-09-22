@@ -421,7 +421,7 @@ textarea:focus {
   }
 }
 
-#exportButton {
+.materialButton {
   border: 10px;
   color: white;
   display: inline-block;
@@ -433,7 +433,7 @@ textarea:focus {
   text-align: center;
 }
 
-#exportButton:hover {
+.materialButton:hover {
   background-color: #7565fb;
 }
 

@@ -16,8 +16,16 @@ class SubmitForm extends React.Component {
           name='onion'
           value={JSON.stringify({actions, store, components})}
         />
-
-        <button type='submit' id='exportButton'>
+        <button
+          type='button'
+          className='materialButton'
+          style={{
+            marginRight: '10px'
+          }}
+        >
+          Reset
+        </button>
+        <button type='submit' className='materialButton'>
           Export Application
         </button>
       </form>

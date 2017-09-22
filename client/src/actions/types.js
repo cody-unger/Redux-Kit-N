@@ -1,5 +1,6 @@
 // misc
 export const TOGGLE_HELP = 'TOGGLE_HELP';
+export const RESET = 'RESET';
 
 // store
 export const SET_OUTPUT_STORE_PROPERTY = 'SET_OUTPUT_STORE_PROPERTY';

@@ -11,6 +11,8 @@ const initialState = {
 
 const outputStoreReducer = (state = initialState, action = {}) => {
   switch (action.type) {
+    case types.RESET:
+      return initialState;
 
     case types.SET_OUTPUT_STORE_PROPERTY: {
       let pathString = utils.outputStore.buildPropertiesPath(action.path);
@@ -24,7 +26,7 @@ const outputStoreReducer = (state = initialState, action = {}) => {
         });
 
         return currentValue;
-      }
+      };
 
       let oldProperty = getOldProperty();
 

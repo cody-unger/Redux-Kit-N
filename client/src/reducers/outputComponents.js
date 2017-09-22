@@ -24,6 +24,8 @@ const outputComponentsReducer = (state = initialState, action = {}) => {
   let newState;
   try {
     switch (action.type) {
+      case types.RESET:
+        return initialState;
 
       case types.SELECT_COMPONENT: {
         if (action.id in state.components) {
@@ -255,16 +257,16 @@ const outputComponentsReducer = (state = initialState, action = {}) => {
         for (let component in components) {
 
           for (let i = components[component].storeProps.length - 1; i >= 0; i--) {
-            
+
             if (components[component].storeProps[i].storeProp === oldOutputStoreProp
                 || components[component].storeProps[i].storeProp.slice(0, outputStorePropLength + 1) === `${oldOutputStoreProp}.`) {
-              
+
               newState = safeSet(
                 state,
                 `${newOutputStoreProp}${components[component].storeProps[i].storeProp.slice(outputStorePropLength)}`,
                 `components.${component}.storeProps.${i}.storeProp`
               );
-            
+
             }
           }
         }

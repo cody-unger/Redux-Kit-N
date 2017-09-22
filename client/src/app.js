@@ -85,7 +85,7 @@ class ConnectedApp extends React.Component {
                     src="redux-kit-n-white.png"
                     rel="icon"
                     style={{
-                      height:'40px',
+                      height: '40px',
                       marginRight: '1em',
                       marginTop: '-.3em'
                     }}
