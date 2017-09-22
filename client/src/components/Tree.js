@@ -447,6 +447,9 @@ class Tree extends React.Component {
               TreeBranch
             )
           }
+          {this.props.outputComponents.components[0].children.length === 0 &&
+            <div className="emptyPromptContainer"><div className="emptyPrompt">Add to Tree by dragging from Components</div></div>
+          }
         </div>
 
       </div>
