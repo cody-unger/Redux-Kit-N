@@ -76,9 +76,8 @@ export const bindStorePropToComponent = (id, outputStoreProp, outputStorePropNam
   outputStorePropName
 });
 
-export const removeStorePropFromComponent = (id, outputStoreProp) => ({
+export const removeStorePropFromComponent = (outputStoreProp) => ({
   type: types.REMOVE_STORE_PROP_FROM_COMPONENT,
-  id,
   outputStoreProp
 });
 
@@ -93,4 +92,10 @@ export const removeParentPropFromComponent = (id, parentProp) => ({
   type: types.REMOVE_PARENT_PROP_FROM_COMPONENT,
   id,
   parentProp
+});
+
+export const editStorePropOnComponent = (oldOutputStoreProp, newOutputStoreProp) => ({
+  type: types.EDIT_STORE_PROP_ON_COMPONENT,
+  oldOutputStoreProp,
+  newOutputStoreProp
 });

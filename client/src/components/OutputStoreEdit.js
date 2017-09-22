@@ -73,7 +73,9 @@ class OutputStoreEdit extends React.Component {
       }
 
       let setProperty = isElementSchema ? {type: this.state.type || undefined} : {name: this.state.name, initialValue, type: this.state.type};
+      
       actions.setOutputStoreProperty(setProperty, editing.path);
+      actions.editStorePropOnComponent(this.props.outputStore.editing.targetName, `${targetNameWithoutLast}${this.state.name}`);
       actions.toggleEditStoreModal(editing.path);
 
     } catch (error) {

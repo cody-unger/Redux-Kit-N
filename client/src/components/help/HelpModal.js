@@ -3,6 +3,7 @@ import _ from 'lodash';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 import unboundActions from '../../actions';
 import store from '../../reduxStore';
 
@@ -29,12 +30,22 @@ let content = {
 
 class HelpModal extends React.Component {
   render() {
+    const dialogActions = [
+      <FlatButton
+        label="OK"
+        primary={true}
+        onClick={() => actions.toggleHelp()}
+        labelStyle={{color: '#6653ff'}}
+      />
+    ];
+
     return (
       <Dialog
         title={titles[this.props.helpSection]}
         modal={false}
         open={!!this.props.helpSection}
         onRequestClose={() => actions.toggleHelp()}
+        actions={dialogActions}
       >
         { content[this.props.helpSection] }
       </Dialog>

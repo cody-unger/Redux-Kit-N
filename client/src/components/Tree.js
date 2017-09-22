@@ -80,6 +80,7 @@ const _removeEmptyProps = (props) => {
 
 class Modal extends React.Component {
   constructor(props) {
+    console.log(props.editing.component);
     super(props);
     let {
       actions,
@@ -293,7 +294,7 @@ class Modal extends React.Component {
       'No properties have been declared in your store.';
 
     return (
-      <div className='col-lg-6'>
+      <div className='col-lg-7'>
         <div style={{display: 'flex'}}>
           <h5> {headerText} </h5>
           <i
@@ -346,9 +347,9 @@ class Modal extends React.Component {
           <MenuItem
             key={action.id}
             insetChildren={true}
-            checked={action.id in formActions}
             value={action.id}
             primaryText={action.name}
+            style={action.id in formActions && {color: '#6653ff'}}
           />
         ));
 
@@ -365,7 +366,7 @@ class Modal extends React.Component {
           onRequestClose={() => actions.closeEditComponentModel()}
         >
           <div className="row">
-            <div className="col-lg-6">
+            <div className="col-lg-5">
               <h5>
                 Actions
               </h5>
@@ -389,6 +390,7 @@ class Modal extends React.Component {
                   >
                     {menuItems}
                   </SelectField>
+                  
               }
             </div>
 

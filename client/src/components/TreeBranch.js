@@ -77,7 +77,7 @@ class TreeBranch extends React.Component {
     let actionIcons = [
       {show: showDisconnectIcon, class: 'purple', onClick: this.handleClickConnect, icon: 'link'},
       {show: showConnectIcon, onClick: this.handleClickConnect, icon: 'link'},
-      {show: showEditIcon, onClick: this.handleClickEdit, icon: 'edit'},
+      {show: showEditIcon, class: 'purple', onClick: this.handleClickEdit, icon: 'edit'},
     ];
 
     return actionIcons.map((icon, i) => {
@@ -85,7 +85,7 @@ class TreeBranch extends React.Component {
         return (
           <i
             key={i}
-            className={'material-icons purple pointer ' + (icon.class || '')}
+            className={'material-icons pointer ' + (icon.class || '')}
             onClick={icon.onClick}
           >
             {icon.icon}
@@ -197,6 +197,8 @@ class TreeBranch extends React.Component {
           </div>
 
           { this.getActionIcons() }
+
+          { !this.state.hover && <div className="editPlaceHolder"></div> }
 
           {
             this.state.connectStoreError &&

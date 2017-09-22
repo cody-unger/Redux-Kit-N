@@ -112,7 +112,7 @@ const outputComponentsReducer = (state = initialState, action = {}) => {
           throw 'The specified child id does not exist';
         }
 
-        let newState = makeMutableCopy(
+        newState = makeMutableCopy(
           state,
           `components.${action.parent}.children.0`
         );
@@ -187,19 +187,24 @@ const outputComponentsReducer = (state = initialState, action = {}) => {
       }
 
       case types.REMOVE_STORE_PROP_FROM_COMPONENT: {
-        let {id, outputStoreProp} = action;
-
-        let storeProps = state.components[id].storeProps;
-        let newStoreProps = storeProps
-          .filter(prop =>
-            prop.storeProp !== outputStoreProp
-          );
-
-        return safeSet(
+        let {outputStoreProp} = action;
+        let outputStorePropLength = outputStoreProp.length;
+        newState = makeMutableCopy(
           state,
-          newStoreProps,
-          `components.${id}.storeProps`
+          'components'
         );
+
+        let components = state.components;
+        for (let component in components) {
+          for (let i = components[component].storeProps.length - 1; i >= 0; i--) {
+            if (components[component].storeProps[i].storeProp === outputStoreProp
+                || components[component].storeProps[i].storeProp.slice(0, outputStorePropLength + 1) === `${outputStoreProp}.`) {
+              newState = safeDelete(state, `components.${component}.storeProps.${i}`);
+            }
+          }
+        }
+
+        return newState;
       }
 
       case types.BIND_PARENT_PROP_TO_COMPONENT: {
@@ -236,6 +241,33 @@ const outputComponentsReducer = (state = initialState, action = {}) => {
           newParentProps,
           `components.${id}.parentProps`
         );
+      }
+
+      case types.EDIT_STORE_PROP_ON_COMPONENT: {
+        let {oldOutputStoreProp, newOutputStoreProp} = action;
+        let outputStorePropLength = oldOutputStoreProp.length;
+        newState = makeMutableCopy(
+          state,
+          'components'
+        );
+
+        let components = state.components;
+        for (let component in components) {
+          for (let i = components[component].storeProps.length - 1; i >= 0; i--) {
+            if (components[component].storeProps[i].storeProp === oldOutputStoreProp
+                || components[component].storeProps[i].storeProp.slice(0, outputStorePropLength + 1) === `${outputStoreProp}.`) {
+              
+              newState = safeSet(
+                state,
+                `${newOutputStoreProp}${components[component].storeProps[i].storeProp.slice(outputStorePropLength)}`,
+                `components.${component}.storeProps.${i}.storeProp`
+              );
+            
+            }
+          }
+        }
+
+        return newState;
       }
 
     }

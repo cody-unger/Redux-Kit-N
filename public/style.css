@@ -131,8 +131,15 @@ p {
 
 .outputComponentChild {
   display: flex;
-  justify-content: space-between;
   margin-left: 20px;
+}
+
+.outputComponentChild {
+  margin-right: 1em;
+}
+
+.outputComponentChildName {
+  margin-right: 1em;
 }
 
 .move {
@@ -173,6 +180,9 @@ p {
 
 .treeBranchNameRow {
   display: flex;
+  width: fit-content;
+  width: -moz-fit-content;
+  width: -webkit-fit-content;
 }
 
 .treeBranchName {
@@ -296,6 +306,9 @@ p {
   display: flex;
   height: 25px;
   white-space: nowrap;
+  width: fit-content;
+  width: -moz-fit-content;
+  width: -webkit-fit-content;
 }
 
 .outputStoreRowText {
@@ -394,16 +407,6 @@ textarea:focus {
 
 .outputActionMouseoverPlaceholder {
   width: 48px;
-}
-
-.btn {
-  width: fit-content;
-  background-color: #6653ff;
-  border: 0;
-}
-
-.btn:focus {
-  outline: none;
 }
 
 .submitForm {
