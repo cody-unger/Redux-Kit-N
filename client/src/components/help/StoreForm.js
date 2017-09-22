@@ -5,8 +5,9 @@ export default (
     Click the  + next to the section header to open the <b>Add Property Wizard</b>!
     <br />
     <br />
-    -The Add Property Wizard will allow you to specify the <b>Name</b>, <b>Type</b>
-    and <b>Initial Value</b> of the store property you’d like to add.
+    -The Add Property Wizard will allow you to specify 
+    the <b>Name</b>, <b>Type</b> and <b>Initial Value</b> of the 
+    store property you’d like to add.
     <br />
     <br />
     -If you specify a <b>Type</b> of Array, you will be able to specify the
