@@ -76,9 +76,8 @@ export const bindStorePropToComponent = (id, outputStoreProp, outputStorePropNam
   outputStorePropName
 });
 
-export const removeStorePropFromComponent = (id, outputStoreProp) => ({
+export const removeStorePropFromComponent = (outputStoreProp) => ({
   type: types.REMOVE_STORE_PROP_FROM_COMPONENT,
-  id,
   outputStoreProp
 });
 

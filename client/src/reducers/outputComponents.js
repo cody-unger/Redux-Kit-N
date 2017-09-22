@@ -112,7 +112,7 @@ const outputComponentsReducer = (state = initialState, action = {}) => {
           throw 'The specified child id does not exist';
         }
 
-        let newState = makeMutableCopy(
+        newState = makeMutableCopy(
           state,
           `components.${action.parent}.children.0`
         );
@@ -187,19 +187,27 @@ const outputComponentsReducer = (state = initialState, action = {}) => {
       }
 
       case types.REMOVE_STORE_PROP_FROM_COMPONENT: {
-        let {id, outputStoreProp} = action;
-
-        let storeProps = state.components[id].storeProps;
-        let newStoreProps = storeProps
-          .filter(prop =>
-            prop.storeProp !== outputStoreProp
-          );
-
-        return safeSet(
+        let {outputStoreProp} = action;
+        let outputStorePropLength = outputStoreProp.length;
+        newState = makeMutableCopy(
           state,
-          newStoreProps,
-          `components.${id}.storeProps`
+          'components'
         );
+
+        let components = state.components;
+        for (let component in components) {
+          console.log(components[component]);
+          console.log('****', components[component].storeProps);
+          for (let i = components[component].storeProps.length - 1; i >= 0; i--) {
+            console.log('**',components[component].storeProps[i].storeProp);
+            if (components[component].storeProps[i].storeProp === outputStoreProp
+                || components[component].storeProps[i].storeProp.slice(0, outputStorePropLength + 1) === `${outputStoreProp}.`) {
+              newState = safeDelete(state, `components.${component}.storeProps.${i}`);
+            }
+          }
+        }
+
+        return newState;
       }
 
       case types.BIND_PARENT_PROP_TO_COMPONENT: {

@@ -26,6 +26,7 @@ class OutputStoreRow extends React.Component {
   handleClickDelete() {
     actions.removeOutputStoreProperty(this.props.path);
     this.props.targetName !== null && actions.updateActionsForRemovedTarget(this.props.targetName);
+    this.props.targetName !== null && actions.removeStorePropFromComponent(this.props.targetName);
   }
 
   render() {
