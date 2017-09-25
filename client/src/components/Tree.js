@@ -276,7 +276,6 @@ class Modal extends React.Component {
                       .map((prop, j) => (
                         <MenuItem
                           key={j}
-                          insetChildren={true}
                           disabled={this.usedProps.has(prop)}
                           value={prop}
                           primaryText={prop}
@@ -355,7 +354,6 @@ class Modal extends React.Component {
         .map((action) => (
           <MenuItem
             key={action.id}
-            insetChildren={true}
             value={action.id}
             primaryText={action.name}
             style={action.id in formActions && {color: '#6653ff'}}
