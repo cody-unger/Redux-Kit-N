@@ -1,17 +1,17 @@
 const _ = require('lodash');
 
-/*  
+/*
 This module will create the reducers file  main function will require the following inputs:
   1: Onion object (onion)
   2: working directory to add file to (dir)
-  3: callBack to trigger next part of the chain (callBack) 
+  3: callBack to trigger next part of the chain (callBack)
 */
 
 const caseMaker = (action, target) => {
   //for each action type we create a new case in the reducer fuction
   let snakeType = _.snakeCase(action.name);
   let type = snakeType.toUpperCase();
-  let result = `\n    case types.${type}:\n      state = _.cloneDeep(state);\n`;
+  let result = `\n    case types.${type}:\n      state = selectiveClone(state, ${action.target});\n`;
   if (action.type === 'set') {
     //for set we will set the target to the new value
     return result += `      state.${action.target} = action.value;\n      return state;`;
@@ -27,7 +27,7 @@ const caseMaker = (action, target) => {
     return result += `      state.${action.target}[action.${prop}] = action.value;\n      return state;`;
   }
   if (action.type === 'delete') {
-    //delete for arrays and objects 
+    //delete for arrays and objects
     if (Array.isArray(target)) {
       return result += `      state.${action.target}.splice(index, 1);\n      return state;`;
     } else {
@@ -45,6 +45,7 @@ const createReducersJs = (onion) => {
   let reducersJs = '/* Reducers File */\n'
     + '\n'
     + `import _ from 'lodash';\n`
+    + `import selectiveClone from 'selective-clone';\n`
     + 'import { types } from \'./actions\';\n'
     + '\n'
     + `const INITIAL_STATE = ${JSON.stringify(onion.store, null, 2)};\n`
@@ -52,7 +53,7 @@ const createReducersJs = (onion) => {
     + 'const reducer = (state = INITIAL_STATE, action) => {\n'
     + '  switch (action.type) {\n';
   _.forEach(actions, (action) => {
-    /*for each action in the onion we pass the action, key, and target to caseMaker, 
+    /*for each action in the onion we pass the action, key, and target to caseMaker,
     which will return the populated custom string for that case */
     let target = store[action.target];
     reducersJs += caseMaker(action, target);
