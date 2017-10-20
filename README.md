@@ -1,13 +1,12 @@
 # Project Name
 
-The project description
+GUI for designing app structure and generating boilerplate React and Redux code
 
 ## Team
 
-- teamMember
-- teamMember
-- teamMember
-- teamMember
+- Cody Unger
+- Neal Williams
+- Dan Darrach
 
 ## Roadmap
 
