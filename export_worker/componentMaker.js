@@ -1,6 +1,6 @@
 const _ = require('lodash');
 
-/*  
+/*
 This module will create the react components, it's will require the following inputs:
   key: the ID key of the specific component to create
   onion: opbject with the needed components to be created and their properties
@@ -8,9 +8,9 @@ This module will create the react components, it's will require the following in
 
 const importStatement = (key, childName) => {
   if (key === '0') {
-    return `import ${childName} from './components/${childName}';\n`;
+    return `import ${childName} from './components/${childName}.jsx';\n`;
   } else {
-    return `import ${childName} from './${childName}';\n`;
+    return `import ${childName} from './${childName}.jsx';\n`;
   }
 };
 
@@ -103,12 +103,12 @@ const exportStatement = (key, compName) => {
   if (key === '0') {
     return `\n\nReactDOM.render(<${compName} />, document.getElementById('root'));\n`;
   } else {
-    return `\n\nexport default ${compName};\n`; 
+    return `\n\nexport default ${compName};\n`;
   }
 };
 
 const createComponent = (key, onion) => {
-  //for the given key of a given component,  
+  //for the given key of a given component,
   //compose the contents of that component and return the string of it's contents
   let component = onion.components[key];
   let compName = _.upperFirst(component.name); //component's name
@@ -124,7 +124,7 @@ const createComponent = (key, onion) => {
   let compHead = 'import React from \'react\';\n'
     + 'import { connect } from \'react-redux\';\n'
     + 'import store from \'../store\';\n'
-    + 'import PropTypes from \'prop-types\';\n';  
+    + 'import PropTypes from \'prop-types\';\n';
 
   let appRenderTemplate = '  render() {\n'
     + '    return (\n'
