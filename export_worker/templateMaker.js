@@ -40,7 +40,7 @@ const webpackConfig = () => {
     + `\n`
     + `const config = {\n`
     + `  devtool: 'source-map',\n`
-    + `  entry: './client/src/App.js',\n`
+    + `  entry: './client/src/App.jsx',\n`
     + `  output: {\n`
     + `    path: path.join(__dirname, 'public/dist'),\n`
     + `    filename: 'bundle.js'\n`

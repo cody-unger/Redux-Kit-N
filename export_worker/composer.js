@@ -43,7 +43,7 @@ const composer = (req, res) => {
   });
 
   zipKit.append(temp.webpackConfig(), {
-    name: 'webpack.config.js'
+    name: 'webpack.config.babel.js'
   });
 
   zipKit.append(temp.styleCss(), {
@@ -62,7 +62,7 @@ const composer = (req, res) => {
   });
 
   zipKit.append(reducer.createReducersJs(onion), {
-    name: 'reducer.js',
+    name: 'reducers.js',
     prefix: mainDir
   });
 
@@ -88,5 +88,5 @@ module.exports.composer = composer;
 /* additional files to include by default
   1. package.json
   2. README.md --usage guide
-  3. 
+  3.
 */
